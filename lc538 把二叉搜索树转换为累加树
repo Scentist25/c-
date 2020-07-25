@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+     private: int sum = 0;
+public:
+//解法的关键在于应该按照节点值降序遍历所有节点，同时记录我们已经遍历过的节点值的和，并把这个和加到当前节点的值中。这种遍历树的方法被称作 反序中序遍历 
+    TreeNode* convertBST(TreeNode* root) {
+        if(!root){
+            return root;
+        }
+       
+        convertBST(root->right);
+        sum+=root->val;
+        root->val=sum;
+        convertBST(root->left);
+          
+        
+        return root;
+
+
+    }
+};
