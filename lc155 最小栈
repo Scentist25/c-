@@ -1,0 +1,88 @@
+ struct node{
+        int val;
+        node* next;
+    };
+class MinStack {
+    
+public:
+    /** initialize your data structure here. */
+  
+    node* head;
+    node* end;
+    int count;
+    int min;
+    MinStack() {
+       this->head=NULL ;
+       this->end=NULL;
+       this->count=0;
+    }
+    
+    void push(int x) {
+        node* p=new node();
+        p->val=x;
+        if(!this->head){
+           this->head=p;
+           this->end=p;
+           this->count++;
+           this->min=x;
+        }
+        else{
+            this->end->next=p;
+            this->end=p;
+            this->count++;
+            this->min=this->min>x?x:this->min;
+        }
+    }
+    
+    void pop() {
+        if(this->count==1){
+            this->head=NULL;
+            this->end=NULL;
+            this->min=NULL;
+            this->count--;
+        }
+        else{
+            node* p=this->head;
+            if(this->end->val==this->min){
+                int temp=this->head->val;
+                 for(int i =0;i<this->count-2;i++){
+                 p=p->next;
+                 temp=temp>p->val?p->val:temp;
+                }
+                this->min=temp;
+                this->end=p;
+                delete(p->next);
+                this->count--;
+            }
+            else{
+                for(int i =0;i<this->count-2;i++){
+                p=p->next;
+                }
+                this->end=p;
+                delete(p->next);
+                this->count--;
+            }
+        }
+        
+        
+    }
+    
+    int top() {
+        return this->end->val;
+        
+    }
+    
+    int getMin() {
+        return this->min;
+        
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
