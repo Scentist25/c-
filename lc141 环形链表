@@ -1,0 +1,27 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+//双指针法，一个一次走一步，一个一次走两步
+//1.若无环，跑得快的先到终点
+//2.若有环，一定有一时刻两个指针指在同一点
+    bool hasCycle(ListNode *head) {
+        ListNode *p=head;
+        ListNode *q=head;
+        while(q&&q->next){
+            q=q->next->next;
+            p=p->next;
+            if(q==p){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+};
