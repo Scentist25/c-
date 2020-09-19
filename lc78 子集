@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> add(vector<vector<int>>& nums,int a){
+        int len=nums.size();
+        for(int i=0;i<len;i++){
+            vector<int> temp=nums[i];
+            temp.push_back(a);
+            nums.push_back(temp);
+        }
+        return nums;
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ret;
+        vector<int> temp;
+        ret.push_back(temp);
+        if(nums.size()==0){return ret;}
+        for(int i=0;i<nums.size();i++){
+            add(ret,nums[i]);
+        }
+
+        return ret;
+        
+    }
+};
